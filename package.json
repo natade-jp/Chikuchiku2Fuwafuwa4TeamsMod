@@ -1,0 +1,17 @@
+{
+	"name": "chikuchiku2fuwafuwa4teamsmod",
+	"version": "1.0.0",
+	"description": "Aim for a mod that converts tingling words into fluffy words within Teams.",
+	"author": "natade-jp <natade3@gmail.com> (https://github.com/natade-jp)",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/natade-jp/Chikuchiku2Fuwafuwa4TeamsMod.git"
+	},
+	"license": "MIT",
+	"keywords": [],
+	"directories": {},
+	"scripts": {},
+	"devDependencies": {
+		"eslint": "^8.5.0"
+	}
+}
