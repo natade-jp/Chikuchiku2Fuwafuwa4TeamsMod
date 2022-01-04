@@ -1,7 +1,7 @@
 {
-	"name": "chikuchiku2fuwafuwa4teamsmod",
+	"name": "chikuwateamsmod",
 	"version": "1.0.0",
-	"description": "Aim for a mod that converts tingling words into fluffy words within Teams.",
+	"description": "Aim for a mod that converts thoughtless words into gentle words within Teams.",
 	"author": "natade-jp <natade3@gmail.com> (https://github.com/natade-jp)",
 	"repository": {
 		"type": "git",
@@ -10,7 +10,10 @@
 	"license": "MIT",
 	"keywords": [],
 	"directories": {},
-	"scripts": {},
+	"scripts": {
+		"build": "node ./scripts/package.build.js",
+		"lint": "eslint src"
+	},
 	"devDependencies": {
 		"@types/jquery": "^3.5.10",
 		"eslint": "^8.5.0"

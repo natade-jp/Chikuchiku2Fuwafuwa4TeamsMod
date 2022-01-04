@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Chikuchiku2Fuwafuwa4TeamsMod
+// @name         ChikuwaTeamsMod
 // @namespace    https://github.com/natade-jp/
 // @version      0.1
 // @description  Aim for a mod that converts thoughtless words into gentle words within Teams.
@@ -20,7 +20,8 @@
 	 * @property {Element} thread スレッド
 	 * @property {HTMLImageElement} icon_elements アイコン情報 
 	 * @property {Element} name_elements 投稿者
-	 * @property {HTMLDivElement[]} text_elements テキスト（div要素の配列。innerHTMLで内部を変更してください）
+	 * @property {Element} date_elements 投稿日
+	 * @property {HTMLCollectionOf<HTMLDivElement>} text_elements テキスト（div要素の配列。innerHTMLで内部を変更してください）
 	 */
 
 	/**
@@ -40,12 +41,14 @@
 		// 各種情報
 		const profile_tag = thread.getElementsByTagName("profile-picture");
 		const name_tag = thread.getElementsByClassName("ts-msg-name");
+		const date_tag = thread.getElementsByClassName("ts-created");
 		const text_tag = thread.getElementsByClassName("message-body-content");
 
 		// 各種情報が1つのみである。恐らく１つのはず。
 		if(
 			(profile_tag.length !== 1) ||
 			(name_tag.length !== 1) ||
+			(date_tag.length !== 1) ||
 			(text_tag.length !== 1)
 		) {
 			return null;
@@ -64,6 +67,7 @@
 			thread : thread,
 			icon_elements : icon_tag[0],
 			name_elements : name_tag[0],
+			date_elements : date_tag[0],
 			text_elements : text_tag[0].getElementsByTagName("div")
 		});
 	};
@@ -80,11 +84,13 @@
 			const thread = thread_array[thread_id];
 
 			// 既にチェック済みなら処理を行わない
-			if(thread.dataset.c2f_checked) {
+			// @ts-ignore
+			if(thread.dataset) {
 				continue;
 			}
 
 			// チェック済みかどうかのフラグをたてる
+			// @ts-ignore
 			thread.dataset.c2f_checked = true;
 
 			// 各種情報を抽出して

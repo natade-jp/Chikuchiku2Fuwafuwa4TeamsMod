@@ -36,8 +36,5 @@
 		"no-var": 2,
 		"prefer-const": 2,
 		"no-param-reassign": 2
-	},
-    "plugins": [
-      "jest"
-    ]
+	}
 }
