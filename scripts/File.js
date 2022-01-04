@@ -191,7 +191,7 @@ class File {
 	 * @param {string} path 
 	 * @return {Array<string>}
 	 */
-	static getDirectory(path) {
+	static findDirectory(path) {
 		const dir_path = path.replace(/[\\/]+$/, "");
 		const load_list = fs.readdirSync(dir_path);
 		const list = [];
@@ -208,10 +208,21 @@ class File {
 	}
 
 	/**
-	 * 名前を取得
+	 * フォルダ名を取得
+	 * @param {string} path 
 	 * @returns {string}
 	 */
-	 static getName(path) {
+	static getDirectoryName(path) {
+		const name = File.getFileName(path);
+		return path.substring(0, path.length - name.length - 1);
+	}
+
+	/**
+	 * 名前を取得
+	 * @param {string} path 
+	 * @returns {string}
+	 */
+	static getFileName(path) {
 		const slashsplit = path.split("/");
 		return slashsplit[slashsplit.length - 1];
 	}
@@ -221,7 +232,7 @@ class File {
 	 * @param {string} path 
 	 * @return {Array<string>}
 	 */
-	static createList(path) {
+	static findAllFiles(path) {
 		const dir_path = path.replace(/[\\/]+$/, "");
 		const load_list = fs.readdirSync(dir_path);
 		const list = [];
@@ -253,7 +264,7 @@ class File {
 		}
 		{
 			// まずはファイルのみを全消去
-			const list = File.createList(path);
+			const list = File.findAllFiles(path);
 			for(let i = 0; i < list.length; i++) {
 				if(File.isFile(list[i])) {
 					File.deleteFile(list[i]);
@@ -262,9 +273,9 @@ class File {
 		}
 		// フォルダの中身が0のフォルダを繰り返し削除
 		for(let i = 0; i < 10; i++) {
-			const list = File.createList(path);
+			const list = File.findAllFiles(path);
 			for(let j = 0; j < list.length; j++) {
-				if(File.createList(list[j]).length === 0) {
+				if(File.findAllFiles(list[j]).length === 0) {
 					fs.rmdirSync(list[j]);
 				}
 			}
@@ -275,12 +286,12 @@ class File {
 
 	/**
 	 * 指定した条件のファイルのリストを作成
-	 * @param {{source : string, destination : string, includes : Array<string>, excludes : Array<string>}} types 
+	 * @param {{source : string, includes : RegExp, excludes : RegExp}} types 
 	 * @return {Array<string>}
 	 */
-	static createTargetList(types) {
+	static findFiles(types) {
 		
-		const filelist = File.createList(types.source);
+		const filelist = File.findAllFiles(types.source);
 
 		/**
 		 * @type {Array<string>}
@@ -290,22 +301,16 @@ class File {
 		for(const i in filelist) {
 			let is_target = false;
 			if(types.includes) {
-				for(const j in types.includes) {
-					if(new RegExp(types.includes[j]).test(filelist[i])) {
-						is_target = true;
-						break;
-					}
+				if(types.includes.test(filelist[i])) {
+					is_target = true;
 				}
 			}
 			if(!is_target) {
 				continue;
 			}
 			if(types.excludes) {
-				for(const j in types.excludes) {
-					if(new RegExp(types.excludes[j]).test(filelist[i])) {
-						is_target = false;
-						break;
-					}
+				if(types.excludes.test(filelist[i])) {
+					is_target = false;
 				}
 			}
 			if(!is_target) {

@@ -1,5 +1,5 @@
-/// <reference path="..\..\ChikuwaTeamsMod.js" />
-/// <reference path="..\..\..\node_modules\@types\jquery\JQueryStatic.d.ts" />
+/// <reference path="..\..\src\ChikuwaTeamsMod.js" />
+/// <reference path="..\..\node_modules\@types\jquery\JQueryStatic.d.ts" />
 
 /**
  * 初期化
