@@ -131,8 +131,7 @@
 			const thread = thread_array[thread_id];
 
 			// 既にチェック済みなら処理を行わない
-			// @ts-ignore
-			if(thread.dataset) {
+			if(thread.getAttribute("data-c2f_checked")) {
 				continue;
 			}
 
@@ -158,8 +157,7 @@
 			const chat = chat_array[chat_id];
 
 			// 既にチェック済みなら処理を行わない
-			// @ts-ignore
-			if(chat.dataset) {
+			if(chat.getAttribute("data-c2f_checked")) {
 				continue;
 			}
 
@@ -195,7 +193,7 @@
 		MODULES_INITIALIZE
 
 		// お試しで1回だけ実行する
-		setTimeout(onTimer, 10000);
+		setInterval(onTimer, 10000);
 	};
 
 	window.addEventListener("load", initFunction, false);
