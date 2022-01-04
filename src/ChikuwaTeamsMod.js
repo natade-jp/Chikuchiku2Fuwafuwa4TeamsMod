@@ -2,7 +2,7 @@
 // @name         Chikuchiku2Fuwafuwa4TeamsMod
 // @namespace    https://github.com/natade-jp/
 // @version      0.1
-// @description  Aim for a mod that converts tingling words into fluffy words within Teams.
+// @description  Aim for a mod that converts thoughtless words into gentle words within Teams.
 // @author       natade-jp
 // @match        https://teams.microsoft.com/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
