@@ -164,6 +164,57 @@ class File {
 		}
 		fs.mkdirSync(path);
 	}
+	
+	/**
+	 * ディレクトリ配下のファイルのリストを作成
+	 * @param {string} path 
+	 * @return {Array<string>}
+	 */
+	 static dirs(path) {
+		const dir_path = path.replace(/[\\/]+$/, "");
+		const load_list = fs.readdirSync(dir_path);
+		const list = [];
+		for(let i = 0; i < load_list.length; i++) {
+			list[i] = dir_path + "/" + load_list[i];
+		}
+		const output = [];
+		for(let i = 0; i < list.length; i++) {
+			if(File.isDirectory(list[i])) {
+				output.push(list[i]);
+			}
+		}
+		return output;
+	}
+
+	/**
+	 * ディレクトリ配下のフォルダを取得
+	 * @param {string} path 
+	 * @return {Array<string>}
+	 */
+	static getDirectory(path) {
+		const dir_path = path.replace(/[\\/]+$/, "");
+		const load_list = fs.readdirSync(dir_path);
+		const list = [];
+		for(let i = 0; i < load_list.length; i++) {
+			list[i] = dir_path + "/" + load_list[i];
+		}
+		const output = [];
+		for(let i = 0; i < list.length; i++) {
+			if(File.isDirectory(list[i])) {
+				output.push(list[i]);
+			}
+		}
+		return output;
+	}
+
+	/**
+	 * 名前を取得
+	 * @returns {string}
+	 */
+	 static getName(path) {
+		const slashsplit = path.split("/");
+		return slashsplit[slashsplit.length - 1];
+	}
 
 	/**
 	 * ディレクトリ配下のファイルのリストを作成

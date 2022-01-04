@@ -1,35 +1,26 @@
-// ==UserScript==
-// @name         ChikuwaTeamsMod
-// @namespace    https://github.com/natade-jp/
-// @version      0.1
-// @description  Aim for a mod that converts thoughtless words into gentle words within Teams.
-// @author       natade-jp
-// @match        https://teams.microsoft.com/*
-// @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
-// @grant        none
-// ==/UserScript==
 /// <reference path="..\node_modules\@types\jquery\JQueryStatic.d.ts" />
+
+/**
+ * スレッド情報
+ * @typedef {Object} ThreadData
+ * @property {string} id スレッドID
+ * @property {Element} thread スレッド
+ * @property {HTMLImageElement} icon_elements アイコン情報 
+ * @property {Element} name_elements 投稿者
+ * @property {Element} date_elements 投稿日
+ * @property {HTMLCollectionOf<HTMLDivElement>} text_elements テキスト（div要素の配列。innerHTMLで内部を変更してください）
+ */
 
 (function() {
 	'use strict';
-
-	/**
-	 * スレッド情報
-	 * @typedef {Object} ThreadData
-	 * @property {string} id スレッドID
-	 * @property {Element} thread スレッド
-	 * @property {HTMLImageElement} icon_elements アイコン情報 
-	 * @property {Element} name_elements 投稿者
-	 * @property {Element} date_elements 投稿日
-	 * @property {HTMLCollectionOf<HTMLDivElement>} text_elements テキスト（div要素の配列。innerHTMLで内部を変更してください）
-	 */
 
 	/**
 	 * 処理を行う
 	 * @param {ThreadData} thread_data
 	 */
 	const processing = function(thread_data) {
-		console.log(thread_data.id + "_" + thread_data.name_elements.innerHTML);
+		// @ts-ignore
+		MODULES_PROCESSING
 	};
 
 	/**
@@ -116,6 +107,9 @@
 		if(!is_target) {
 			return;
 		}
+		
+		// @ts-ignore
+		MODULES_INITIALIZE
 
 		// お試しで1回だけ実行する
 		setTimeout(onTimer, 10000);

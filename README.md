@@ -1,21 +1,26 @@
-MIT License
+# Chikuwa Teams Mod
 
-Copyright (c) 2021 natade
+# 説明
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+本プログラムは、`Microsoft Teams` で利用できる `Greasmonkey` 用のMODです。
+元々の目的は `チクチク言葉` を `フワフワ言葉` へ変換するのを目的として作成していました。
+使うためには、個人でビルドが必要です。
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+# インストール方法
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+準備中です。
+
+# 利用方法
+
+正式な利用方法のテキストが準備できていません。
+
+## その他
+
+その他、`Node.js` のライブラリをいくつか導入しています。詳細は `./main/package.json` を参照してください。
+
+# ライセンス
+
+GitHub上で公開しているソースコード群は、特別に何か記載していない限り、MITライセンスと致します。ただしコード上にライセンス等記及びフォルダ階層上のライセンスファイルがありましたら、そちらを優先下さい。
+
+## Author ##
+- [natade-jp](https://github.com/natade-jp/)
