@@ -45,7 +45,7 @@ for(file_num in modules) {
 		// データを記録する
 		modules_text.push(o3);
 		initialize_text.push(function_name_initialize + "();");
-		processing_text.push(function_name_processing + "(thread_data);");
+		processing_text.push(function_name_processing + "(message_data);");
 	}
 }
 
