@@ -20,6 +20,7 @@
 	 * @param {TeamsMessageData} message_data
 	 */
 	const processing = function(message_data) {
+		console.log(message_data);
 		// @ts-ignore
 		MODULES_PROCESSING
 	};
@@ -33,7 +34,7 @@
 		// 各種情報
 		const profile_tag = thread.getElementsByTagName("profile-picture");
 		const name_tag = thread.getElementsByClassName("ts-msg-name");
-		const date_tag = thread.getElementsByClassName("ts-created");
+		const date_tag = thread.getElementsByClassName("message-datetime");
 		const text_tag = thread.getElementsByClassName("message-body-content");
 
 		// 期待した情報か？
@@ -80,6 +81,7 @@
 	 */
 	 const extractChat = function(chat) {
 		// 各種情報
+		const avatar_tag = chat.getElementsByClassName("ui-avatar");
 		const name_tag = chat.getElementsByClassName("ui-chat__message__author");
 		const date_tag = chat.getElementsByClassName("ui-chat__message__timestamp");
 		const text_tag = chat.getElementsByClassName("ui-chat__message__content");
@@ -100,11 +102,18 @@
 			return null;
 		}
 
+		let icon_tag = null;
+
+		if(avatar_tag.length === 1) {
+			const img_tag = avatar_tag[0].getElementsByTagName("img");
+			icon_tag = img_tag.length === 1 ? img_tag[0] : null;
+		}
+
 		return ({
 			id : id,
 			thread : null,
 			chat : chat,
-			icon_elements : null,
+			icon_elements : icon_tag,
 			name_elements : name_tag[0],
 			date_elements : date_tag[0],
 			text_elements : text_tag[0].getElementsByTagName("div")
@@ -126,7 +135,8 @@
 		 * スレッドから書き込みをすべて取得
 		 */
 		const thread_array = getThread();
-		for(const thread_id in thread_array) {
+
+		for(let thread_id = 0; thread_id < thread_array.length; thread_id++) {
 			
 			const thread = thread_array[thread_id];
 
@@ -140,6 +150,7 @@
 			thread.dataset.c2f_checked = true;
 
 			// 各種情報を抽出して
+			console.log(thread);
 			const thread_data = extractThread(thread);
 			if(thread_data) {
 
@@ -152,7 +163,12 @@
 		 * チャットから書き込みをすべて取得
 		 */
 		const chat_array = getChat();
-		for(const chat_id in chat_array) {
+		if(chat_array.length === 0){
+			console.log(document);
+			console.log(document.getElementsByClassName("ui-chat__message"));
+		}
+		
+		for(let chat_id = 0; chat_id < chat_array.length; chat_id++) {
 			
 			const chat = chat_array[chat_id];
 
@@ -166,6 +182,7 @@
 			chat.dataset.c2f_checked = true;
 
 			// 各種情報を抽出して
+			console.log(chat);
 			const chat_data = extractChat(chat);
 			if(chat_data) {
 
@@ -173,6 +190,7 @@
 				processing(chat_data);
 			}
 		}
+
 	};
 
 	/**

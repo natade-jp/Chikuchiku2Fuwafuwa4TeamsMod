@@ -18,8 +18,6 @@ const processing = function(message_data) {
 		return;
 	}
 
-	console.log(title);
-
 	/**
 	 * @type {string}
 	 */
