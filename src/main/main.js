@@ -20,7 +20,6 @@
 	 * @param {TeamsMessageData} message_data
 	 */
 	const processing = function(message_data) {
-		console.log(message_data);
 		// @ts-ignore
 		MODULES_PROCESSING
 	};
@@ -129,75 +128,77 @@
 	};
 	
 	const onTimer = function() {
-		console.log("START!")
 
 		/**
 		 * スレッドから書き込みをすべて取得
 		 */
 		const thread_array = getThread();
+		if(thread_array.length !== 0) {
+			for(let thread_id = 0; thread_id < thread_array.length; thread_id++) {
+				
+				const thread = thread_array[thread_id];
 
-		for(let thread_id = 0; thread_id < thread_array.length; thread_id++) {
-			
-			const thread = thread_array[thread_id];
+				// 既にチェック済みなら処理を行わない
+				if(thread.getAttribute("data-c2f_checked")) {
+					continue;
+				}
 
-			// 既にチェック済みなら処理を行わない
-			if(thread.getAttribute("data-c2f_checked")) {
-				continue;
-			}
+				// チェック済みかどうかのフラグをたてる
+				// @ts-ignore
+				thread.dataset.c2f_checked = true;
 
-			// チェック済みかどうかのフラグをたてる
-			// @ts-ignore
-			thread.dataset.c2f_checked = true;
+				// 各種情報を抽出して
+				const thread_data = extractThread(thread);
+				if(thread_data) {
 
-			// 各種情報を抽出して
-			console.log(thread);
-			const thread_data = extractThread(thread);
-			if(thread_data) {
-
-				// 処理を引き渡す
-				processing(thread_data);
+					// 処理を引き渡す
+					processing(thread_data);
+				}
 			}
 		}
 
 		/**
-		 * チャットから書き込みをすべて取得
+		 * 個別チャットから書き込みをすべて取得
 		 */
 		const chat_array = getChat();
-		if(chat_array.length === 0){
-			console.log(document);
-			console.log(document.getElementsByClassName("ui-chat__message"));
+		if(chat_array.length === 0) {
+			for(let chat_id = 0; chat_id < chat_array.length; chat_id++) {
+			
+				const chat = chat_array[chat_id];
+	
+				// 既にチェック済みなら処理を行わない
+				if(chat.getAttribute("data-c2f_checked")) {
+					continue;
+				}
+	
+				// チェック済みかどうかのフラグをたてる
+				// @ts-ignore
+				chat.dataset.c2f_checked = true;
+	
+				// 各種情報を抽出して
+				console.log(chat);
+				const chat_data = extractChat(chat);
+				if(chat_data) {
+	
+					// 処理を引き渡す
+					processing(chat_data);
+				}
+			}
+		}
+		else {
+			// @ts-ignore
+			globalThis.debug_chikuwatest = document;
+	//		console.log(document);
+	//		console.log(document.getElementsByClassName("ui-chat__message"));
 		}
 		
-		for(let chat_id = 0; chat_id < chat_array.length; chat_id++) {
-			
-			const chat = chat_array[chat_id];
-
-			// 既にチェック済みなら処理を行わない
-			if(chat.getAttribute("data-c2f_checked")) {
-				continue;
-			}
-
-			// チェック済みかどうかのフラグをたてる
-			// @ts-ignore
-			chat.dataset.c2f_checked = true;
-
-			// 各種情報を抽出して
-			console.log(chat);
-			const chat_data = extractChat(chat);
-			if(chat_data) {
-
-				// 処理を引き渡す
-				processing(chat_data);
-			}
-		}
-
 	};
 
 	/**
 	 * 初期化を行う
 	 */
 	const initFunction = function() {
-		console.log("TEST!")
+		console.log("init Chikuwa Team Mod");
 
 		/**
 		 * ターゲットサイトか

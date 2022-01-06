@@ -1,4 +1,4 @@
-/// <reference path="..\..\main\ChikuwaTeamsMod.js" />
+/// <reference path="..\..\main\main.js" />
 /// <reference path="..\..\..\node_modules\@types\jquery\JQueryStatic.d.ts" />
 
 /**
