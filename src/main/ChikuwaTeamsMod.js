@@ -1,4 +1,4 @@
-/// <reference path="..\node_modules\@types\jquery\JQueryStatic.d.ts" />
+/// <reference path="..\..\node_modules\@types\jquery\JQueryStatic.d.ts" />
 
 /**
  * テキスト情報

@@ -18,7 +18,7 @@ const jsdir_path = jsfile_path.substring(0, jsfile_path.length - slashsplit[slas
 // @ts-ignore
 process.chdir(jsdir_path);
 
-const File = require("../../scripts/File.js");
+const File = require("../../../scripts/File.js");
 
 // ファイルを移動
-File.copy("./main.js", "../../tmp/TimeModified.js");
+File.copy("./main.js", "../../../tmp/TimeModified.js");

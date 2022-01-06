@@ -4,9 +4,9 @@
 const package_info = JSON.parse(File.loadTextFile("./package.json"));
 
 const code = {
-	header  : "./src/Header.js",
-	main    : "./src/ChikuwaTeamsMod.js",
-	modules : "./modules",
+	header  : "./src/main/Header.js",
+	main    : "./src/main/ChikuwaTeamsMod.js",
+	modules : "./src/modules",
 	tmp 	: "./tmp",
 	output  : "./build/ChikuwaTeamsMod.js"
 };
