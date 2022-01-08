@@ -187,9 +187,10 @@
 		}
 		else {
 			// @ts-ignore
-			globalThis.debug_chikuwatest = document;
-	//		console.log(document);
-	//		console.log(document.getElementsByClassName("ui-chat__message"));
+			if(globalThis.debug_chikuwatest === undefined) {
+				// @ts-ignore
+				globalThis.debug_chikuwatest = document;
+			}
 		}
 		
 	};

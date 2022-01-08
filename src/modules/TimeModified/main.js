@@ -4,17 +4,18 @@
 /**
  * 初期化
  */
+// @ts-ignore
 const initialize = function() {
 };
 
 /**
- * 処理を行う
+ * Teams の時刻表記を相対的な時刻から絶対的な時刻へ切り替える
  * @param {TeamsMessageData} message_data
  */
+// @ts-ignore
 const processing = function(message_data) {
 
-	const title = message_data.date_elements.getAttribute("title");
-	if(!title) {
+	if(message_data.date_elements === null) {
 		return;
 	}
 
@@ -24,19 +25,28 @@ const processing = function(message_data) {
 	// @ts-ignore
 	const innerText = message_data.date_elements.innerText;
 
-	// YYYY/MM/DD
+	// YYYY/MM/DD 形式であれば特に変更なし
 	if(/^[0-9]{4}\/[0-9]{1,2}\/[0-9]{1,2}/.test(innerText)) {
 		return;
 	}
 
-	// YY/MM/DD
+	// YY/MM/DD 形式であれば、YYYY/MM/DD 形式へ変換する
 	if(/^[0-9]{2}\/[0-9]{1,2}\/[0-9]{1,2}/.test(innerText)) {
+		const date = (new Date()).getFullYear().toString();
 		// @ts-ignore
-		message_data.date_elements.innerText = "20" + innerText;
+		message_data.date_elements.innerText = date.substring(0, 2) + innerText;
 		return;
 	}
 
-	// YY月MM日
+	/**
+	 * 時刻
+	 */
+	 const title = message_data.date_elements.getAttribute("title");
+	 if(!title) {
+		 return;
+	 }
+ 
+	// YY月MM日 形式であれば、YYYY/MM/DD 形式へ変換する
 	if(/^[0-9]{1,2}月[0-9]{1,2}日/.test(title)) {
 		const date = (new Date()).getFullYear().toString();
 		// @ts-ignore
